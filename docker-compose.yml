@@ -1,0 +1,31 @@
+version: '3.3'
+
+services:
+  api:
+    build:
+      context: .
+    command: sh -c "python manage.py wait_for_db &&
+      python manage.py migrate &&
+      python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - 8000:8000
+    volumes:
+      - ./api:/api
+    environment:
+      - SECRET_KEY=secretkey
+      - DEBUG=1
+      - DB_HOST=db
+      - DB_NAME=raizendb
+      - DB_USER=raizenuser
+      - DB_PASS=raizenpassword
+      - DB_PORT=5432
+      - ALLOWED_HOSTS=*
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13-alpine
+    environment:
+      - POSTGRES_DB=raizendb
+      - POSTGRES_USER=raizenuser
+      - POSTGRES_PASSWORD=raizenpassword
