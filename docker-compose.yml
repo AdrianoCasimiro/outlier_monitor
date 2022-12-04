@@ -9,6 +9,7 @@ services:
       python manage.py runserver 0.0.0.0:8000"
     ports:
       - 8000:8000
+      - 7000:7000
     volumes:
       - ./api:/api
     environment:
@@ -29,3 +30,12 @@ services:
       - POSTGRES_DB=raizendb
       - POSTGRES_USER=raizenuser
       - POSTGRES_PASSWORD=raizenpassword
+
+  pgadmin:
+    image: dpage/pgadmin4:snapshot
+    container_name: pgadmin-Bcf
+    ports:
+      - 90:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@bcf.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
