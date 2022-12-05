@@ -1,4 +1,4 @@
-# outlier_monitor
+# Outlier Monitor
 Detecção de consumo atípico
 
 # Como rodar o projeto
