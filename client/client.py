@@ -21,7 +21,7 @@ def get_users_transactions(users):
 
         transactions_per_user = []
         users_consumptions = []
-        for _ in users[:100]:
+        for _ in users[:200]:
             transactions_per_user.extend(row for row in reader_list if _[0].split(',')[0] == row[0].split(',')[1])
             users_consumptions.append(get_total_value_transactions_user(transactions_per_user, _))
         return users_consumptions
@@ -60,7 +60,7 @@ if __name__ == '__main__':
 
     users = get_user_data()
     total_transaction = get_users_transactions(users)
-    print(f"Total value from first 500 users: \n {total_transaction}")
+    print(f"Total value from first 200 users: \n {total_transaction}")
     send_prediction()
 
 
