@@ -26,7 +26,6 @@ class CreateOutlierProbabilityViewset(APIView):
                             (time, id, outlier_prob) VALUES(NOW(),{serializer.data['outlier'].split()[0]},{serializer.data['outlier'].split()[1]})'''
                 cursor.execute(insert_data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -44,4 +43,4 @@ class ListOutliersProbabilityViewset(APIView):
                 outliers = GetOutliersProbabilitySerializer(project_data, many=True)
             return Response(outliers.data, status=status.HTTP_200_OK)
         except Exception as error:
-            return Response(error, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(str(error), status=status.HTTP_500_INTERNAL_SERVER_ERROR)

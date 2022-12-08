@@ -1,6 +1,8 @@
 # Outlier Monitor
 Detecção de consumo atípico
 
+Não foi implementado a detecção de outliers
+
 # Como rodar o projeto
 
 - Clone o repositório

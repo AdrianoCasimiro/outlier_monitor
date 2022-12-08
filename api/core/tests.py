@@ -20,11 +20,23 @@ class TestOutlier(TestCase):
         }
 
         res = self.client.post(CREATE_OUTLIER_URL, payload)
-
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
 
     
+    def test_create_outlier_error(self):
+        '''Test creating a new Outlier with an error code'''
+
+        payload = {
+            'project_name': 'RaizenOutlier',
+            'table_name': 'Values',
+            'outlier': '1 '
+        }
+
+        res = self.client.post(CREATE_OUTLIER_URL, payload)
+        self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
     
+    
+
 class ListOutlier(TestCase):
     '''List Outliers registered'''
 
@@ -38,9 +50,8 @@ class ListOutlier(TestCase):
 
         self.client.post(CREATE_OUTLIER_URL, payload)
 
-    def test_create_outlier_success(self):
+    def test_list_outlier(self):
         '''Test Listining Outliers'''
 
         res = self.client.get('/api/list_outliers/RaizenOutlier/Values/')
-
         self.assertEqual(res.status_code, status.HTTP_200_OK)
